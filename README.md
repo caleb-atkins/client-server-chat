@@ -1,5 +1,5 @@
 # client-server-chat
-Direct client-server quick chat for relaying short messages on same machine
+Direct client-server quick chat for relaying short messages on same machine (hosted on port 5000)
 
 Send messages (<= 9 characters) between host server and client deployments on the same machine
 
