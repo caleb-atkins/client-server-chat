@@ -40,7 +40,7 @@ int main()
   // check for socket error
   if(sockFD == -1)
   {
-	  cout << "<--- ERROR: SOCKET CREATION FAILED --->" << endl;
+    cout << "<--- ERROR: SOCKET CREATION FAILED --->" << endl;
   }
 
   // good to go!
@@ -65,29 +65,29 @@ int main()
     // check for binding error
     if(sockBindStatus == -1)
     {
-		  cout << "<--- ERROR: SOCKET BINDING FAILED --->" << endl;
-	  }
+      cout << "<--- ERROR: SOCKET BINDING FAILED --->" << endl;
+    }
 
     // pop open chat
     else
     {
       // wait for incoming client connections
-	    int listenStatus = listen(sockFD, 10);
+      int listenStatus = listen(sockFD, 10);
 
-	    if(listenStatus != 0)
+      if(listenStatus != 0)
       {
-	      cout << "<--- ERROR: LISTEN FAILED --->" << endl;
-	    }
+        cout << "<--- ERROR: LISTEN FAILED --->" << endl;
+      }
 
-	    else
+      else
       {
-	      cout << "Server started successfully! Awaiting client connection..." << endl;
+        cout << "Server started successfully! Awaiting client connection..." << endl;
 
         // fetch pending client connections
         socklen_t length_client = sizeof(clientSock);
-	      sockFD =  accept(sockFD, (struct sockaddr *)&clientSock, &length_client);
+        sockFD =  accept(sockFD, (struct sockaddr *)&clientSock, &length_client);
 
-	      if(sockFD == -1)
+        if(sockFD == -1)
         {
           cout << "<--- ERROR: CLIENT SOCKET CONNECTION FAILED --->" << endl;
         }

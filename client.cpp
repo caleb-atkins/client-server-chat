@@ -29,13 +29,13 @@ int main()
   /*----Create socket (file descriptor)----*/
 
   // IPv4 stream socket file descriptor
-	int sockFD = socket(PF_INET, SOCK_STREAM, 0);
+  int sockFD = socket(PF_INET, SOCK_STREAM, 0);
 
   // check for socket error
   if(sockFD == -1)
   {
-		cout << "<--- ERROR: SOCKET CREATION FAILED --->" << endl;
-	}
+    cout << "<--- ERROR: SOCKET CREATION FAILED --->" << endl;
+  }
 
   // good to go!
   else
@@ -43,26 +43,26 @@ int main()
     /*----Create socket structure----*/
 
     // set to IPv4
-   	sock.sin_family = AF_INET;
+    sock.sin_family = AF_INET;
 
     // localhost IP
-  	sock.sin_addr.s_addr = inet_addr("127.0.0.1");
+    sock.sin_addr.s_addr = inet_addr("127.0.0.1");
 
     // port 5000 in NBO
-   	sock.sin_port = htons(portNumber);
+    sock.sin_port = htons(portNumber);
 
     /*----Connect socket----*/
 
-   	int sockConnStatus = connect(sockFD, (struct sockaddr*)&sock, sizeof(sock));
+    int sockConnStatus = connect(sockFD, (struct sockaddr*)&sock, sizeof(sock));
 
     // check for socket connectivity failure
-   	if(sockConnStatus == -1)
+    if(sockConnStatus == -1)
     {
-   		cout << "<--- ERROR: SOCKET CONNECTION FAILED --->" << endl;
-   	}
+      cout << "<--- ERROR: SOCKET CONNECTION FAILED --->" << endl;
+    }
 
     // connection successfull
-   	else
+    else
     {
       cout << "Connected! Enjoy!" << endl;
 
@@ -71,26 +71,26 @@ int main()
       {
         // make space for and receive client input to send to server
         memset(buffer, 0, 1024);
-    	  cin.getline(buffer, '\n');
+        cin.getline(buffer, '\n');
 
         // write to socket file descriptor
-				int writeStatus = write(sockFD, buffer, 20);
+        int writeStatus = write(sockFD, buffer, 20);
 
-				if(writeStatus == -1)
+        if(writeStatus == -1)
         {
-				  cout << "<--- ERROR: SOCKET FD WRITE FAILED --->" << endl;
-				}
+          cout << "<--- ERROR: SOCKET FD WRITE FAILED --->" << endl;
+        }
 
         // make space for and receive server message
         memset(buffer, 0, 256);
-				int readStatus = read(sockFD, buffer, 255);
-				cout << buffer << endl;
+        int readStatus = read(sockFD, buffer, 255);
+        cout << buffer << endl;
 
-				if(readStatus == -1)
+        if(readStatus == -1)
         {
-					cout << "<--- ERROR: SOCKET FD READ FAILED --->" << endl;
-				}
-   		}
-   	}
-	}
+          cout << "<--- ERROR: SOCKET FD READ FAILED --->" << endl;
+        }
+      }
+    }
+  }
 }
