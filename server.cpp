@@ -35,16 +35,16 @@ int main()
   /*----Create socket (file descriptor)----*/
 
   // IPv4 stream socket file descriptor
-	int sockFD = socket(PF_INET, SOCK_STREAM, 0);
+  int sockFD = socket(PF_INET, SOCK_STREAM, 0);
 
   // check for socket error
-	if(sockFD == -1)
+  if(sockFD == -1)
   {
-		cout << "<--- ERROR: SOCKET CREATION FAILED --->" << endl;
-	}
+	  cout << "<--- ERROR: SOCKET CREATION FAILED --->" << endl;
+  }
 
   // good to go!
-	else
+  else
   {
 
     /*----Create socket structure----*/
@@ -60,10 +60,10 @@ int main()
 
     /*----Bind socket----*/
 
-		int sockBindStatus =  bind(sockFD, (struct sockaddr *)&sock, sizeof(sock));
+    int sockBindStatus =  bind(sockFD, (struct sockaddr *)&sock, sizeof(sock));
 
     // check for binding error
-		if(sockBindStatus == -1)
+    if(sockBindStatus == -1)
     {
 		  cout << "<--- ERROR: SOCKET BINDING FAILED --->" << endl;
 	  }
