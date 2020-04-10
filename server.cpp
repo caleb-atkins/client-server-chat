@@ -69,57 +69,57 @@ int main()
 	  }
 
     // pop open chat
-		else
+    else
     {
       // wait for incoming client connections
-			int listenStatus = listen(sockFD, 10);
+	    int listenStatus = listen(sockFD, 10);
 
-			if(listenStatus != 0)
+	    if(listenStatus != 0)
       {
-				cout << "<--- ERROR: LISTEN FAILED --->" << endl;
-			}
+	      cout << "<--- ERROR: LISTEN FAILED --->" << endl;
+	    }
 
-			else
+	    else
       {
-				cout << "Server started successfully! Awaiting client connection..." << endl;
+	      cout << "Server started successfully! Awaiting client connection..." << endl;
 
         // fetch pending client connections
         socklen_t length_client = sizeof(clientSock);
-				sockFD =  accept(sockFD, (struct sockaddr *)&clientSock, &length_client);
+	      sockFD =  accept(sockFD, (struct sockaddr *)&clientSock, &length_client);
 
-				if(sockFD == -1)
+	      if(sockFD == -1)
         {
-				  cout << "<--- ERROR: CLIENT SOCKET CONNECTION FAILED --->" << endl;
-				}
+          cout << "<--- ERROR: CLIENT SOCKET CONNECTION FAILED --->" << endl;
+        }
 
-				else
+        else
         {
-			    cout << "Client has connected! Enjoy!" << endl;
+          cout << "Client has connected! Enjoy!" << endl;
 
-					while(true)
+          while(true)
           {
             // make space for and receive client message
             memset(buffer, 0, 256);
-						int readStatus = read(sockFD, buffer, 255);
-						cout << buffer << endl;
+            int readStatus = read(sockFD, buffer, 255);
+            cout << buffer << endl;
 
-						if(readStatus == -1)
+            if(readStatus == -1)
             {
-						  cout << "<--- ERROR: SOCKET FD READ FAILED --->" << endl;
-						}
+              cout << "<--- ERROR: SOCKET FD READ FAILED --->" << endl;
+            }
 
             // make space for and receive server input to send to client
             memset(buffer, 0, 256);
-    				cin.getline(buffer, '\n');
-						int writeStatus = write(sockFD, buffer, 12);
+            cin.getline(buffer, '\n');
+            int writeStatus = write(sockFD, buffer, 12);
 
-						if(writeStatus == -1)
+            if(writeStatus == -1)
             {
-							cout << "<--- ERROR: SOCKET FD WRITE FAILED --->" << endl;
-						}
-					}
-				}
-			}
-		}
-	}
+              cout << "<--- ERROR: SOCKET FD WRITE FAILED --->" << endl;
+            }
+          }
+        }
+      }
+    }
+  }
 }
